@@ -38,8 +38,11 @@ jobs:
         to: pdf
         path: mon_rapport.qmd
     
-    - name: Upload a Build Artifact
-      uses: actions/upload-artifact@v3.1.0
-      with:
-        name: mon_rapport.pdf
-        path: mon_rapport.pdf
+
+    - name: Commit results
+      run: |
+          git config --local user.email "kn.samati@gmail.com"
+          git config --local user.name "knsamati"
+          git add mon_rapport.pdf
+          git commit -m 'Rapport updated' || echo "No changes to commit"
+          git push origin || echo "No changes to commit"
