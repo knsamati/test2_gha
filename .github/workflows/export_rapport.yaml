@@ -38,6 +38,11 @@ jobs:
         to: pdf
         path: mon_rapport.qmd
     
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v3.1.0
+      with:
+        name: mon_rapport.pdf
+        path: mon_rapport.pdf
 
     - name: Commit results
       run: |
