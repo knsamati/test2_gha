@@ -1,7 +1,7 @@
 name: Generate PDF
 on:
-  pull_request:
-    types: [opened, synchronize, reopened, labeled]
+  workflow_dispatch:
+
 
 jobs:
   generate-pdf:
