@@ -23,7 +23,7 @@ jobs:
             any::xml2
             any::gt
             any::tidyverse
-            
+
     - name: Setup Quarto
       uses: quarto-dev/quarto-actions/setup@v2
       with:
@@ -41,5 +41,5 @@ jobs:
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3.1.0
       with:
-        name: file.pdf
-        path: file.pdf
+        name: mon_rapport.pdf
+        path: mon_rapport.pdf

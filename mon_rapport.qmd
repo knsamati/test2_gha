@@ -24,11 +24,17 @@ The `echo: false` option disables the printing of code (only output is displayed
 You can add options to executable code like this 
 
 ```{r}
+#| warning: false
+
 library(knitr)
 library(tidyverse)
 readRDS('survey_data.rds') |>
     select(3:6) -> df
-kable(df)
+
+dim(df)
+df |>
+  summarise(nombre = n(),.by=enqu_teur) |>
+  kable()
 ```
 
 The `echo: false` option disables the printing of code (only output is displayed).
