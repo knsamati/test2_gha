@@ -1,13 +1,17 @@
 {
-  "hash": "23ab009b3f93ec4b765565cd0fc26cb1",
+  "hash": "406bb42653391d54cc8922b4ca5f861b",
   "result": {
     "engine": "knitr",
-    "markdown": "---\ntitle: \"Rapport\"\nauthor: \"Komlan Samati\"\nformat: pdf\n---\n\n\n\n## Quarto\n\nQuarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.\n\n## Running Code\n\nWhen you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:\n\nYou can add options to executable code like this \n\n\n\n::: {.cell}\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] 4\n```\n\n\n:::\n:::\n\n\n\nThe `echo: false` option disables the printing of code (only output is displayed).\n\nYou can add options to executable code like this \n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(knitr)\nlibrary(tidyverse)\nreadRDS('survey_data.rds') |>\n    select(3:6) -> df\n\ndim(df)\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] 26  4\n```\n\n\n:::\n\n```{.r .cell-code}\ndf |>\n  summarise(nombre = n(),.by=enqu_teur) |>\n  kable()\n```\n\n::: {.cell-output-display}\n\n\n|enqu_teur   | nombre|\n|:-----------|------:|\n|enqueteur_1 |      9|\n|enqueteur_3 |      5|\n|enqueteur_2 |      6|\n|enqueteur_4 |      6|\n\n\n:::\n:::\n\n\n\nThe `echo: false` option disables the printing of code (only output is displayed).\n\n\n\n\n",
+    "markdown": "---\ntitle: \"Rapport\"\nauthor: \"Komlan Samati\"\nformat:\n  pdf:\n    pdf-engine: lualatex\n---\n\n\n\n## Quarto\n\nQuarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.\n\n## Running Code\n\nWhen you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:\n\nYou can add options to executable code like this \n\n\n\n::: {.cell}\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] 4\n```\n\n\n:::\n:::\n\n\n\nThe `echo: false` option disables the printing of code (only output is displayed).\n\nYou can add options to executable code like this \n\n\n\n[1] 26  4\n\n\n|enqu_teur   | nombre|\n|:-----------|------:|\n|enqueteur_1 |      9|\n|enqueteur_3 |      5|\n|enqueteur_2 |      6|\n|enqueteur_4 |      6|\n\n\n\nThe `echo: false` option disables the printing of code (only output is displayed).\n\n\n\n\n\\begin{longtable}{llrl}\n\\toprule\nEnquêteur & Sexe & Age & Lieu d'habitation \\\\ \n\\midrule\\addlinespace[2.5pt]\nenqueteur\\_1 & masculin & 18 & maritime \\\\ \nenqueteur\\_3 & feminin & 25 & savanes \\\\ \nenqueteur\\_2 & masculin & 85 & NA \\\\ \nenqueteur\\_1 & masculin & 23 & kara \\\\ \nenqueteur\\_4 & masculin & 50 & plateaux \\\\ \nenqueteur\\_1 & feminin & 70 & plateaux \\\\ \nenqueteur\\_3 & feminin & 19 & savanes \\\\ \nenqueteur\\_1 & masculin & 36 & centrale \\\\ \nenqueteur\\_1 & masculin & 45 & plateaux \\\\ \nenqueteur\\_4 & masculin & 56 & savanes \\\\ \nenqueteur\\_2 & masculin & 28 & centrale \\\\ \nenqueteur\\_4 & feminin & 89 & centrale \\\\ \nenqueteur\\_2 & feminin & 24 & kara \\\\ \nenqueteur\\_3 & masculin & 26 & plateaux \\\\ \nenqueteur\\_4 & feminin & 60 & savanes \\\\ \nenqueteur\\_1 & masculin & 89 & NA \\\\ \nenqueteur\\_2 & masculin & 63 & NA \\\\ \nenqueteur\\_3 & feminin & 31 & maritime \\\\ \nenqueteur\\_2 & feminin & 34 & NA \\\\ \nenqueteur\\_1 & masculin & 24 & centrale \\\\ \nenqueteur\\_1 & feminin & 86 & kara \\\\ \nenqueteur\\_4 & masculin & 35 & kara \\\\ \nenqueteur\\_4 & masculin & 25 & kara \\\\ \nenqueteur\\_1 & masculin & 85 & maritime \\\\ \nenqueteur\\_3 & feminin & 26 & NA \\\\ \nenqueteur\\_2 & feminin & 58 & NA \\\\ \n\\bottomrule\n\\end{longtable}\n",
     "supporting": [],
     "filters": [
       "rmarkdown/pagebreak.lua"
     ],
-    "includes": {},
+    "includes": {
+      "include-in-header": [
+        "\\usepackage{booktabs}\n\\usepackage{caption}\n\\usepackage{longtable}\n\\usepackage{colortbl}\n\\usepackage{array}\n"
+      ]
+    },
     "engineDependencies": {},
     "preserve": null,
     "postProcess": false

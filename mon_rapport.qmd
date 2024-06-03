@@ -1,7 +1,9 @@
 ---
 title: "Rapport"
 author: "Komlan Samati"
-format: pdf
+format:
+  pdf:
+    pdf-engine: lualatex
 ---
 
 ## Quarto
@@ -24,10 +26,15 @@ The `echo: false` option disables the printing of code (only output is displayed
 You can add options to executable code like this 
 
 ```{r}
+#| label: tab
 #| warning: false
+#| message: false
+#| echo: false
+#| results: "asis"
 
 library(knitr)
 library(tidyverse)
+library(gt)
 readRDS('survey_data.rds') |>
     select(3:6) -> df
 
@@ -39,6 +46,19 @@ df |>
 
 The `echo: false` option disables the printing of code (only output is displayed).
 
+
+```{r}
+#| label: tab1
+#| warning: false
+#| message: false
+#| echo: false
+#| results: "asis"
+
+df |>
+  labelled::remove_val_labels() |>
+  gt::gt()
+
+```
 
 
 

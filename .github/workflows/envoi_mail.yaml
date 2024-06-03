@@ -1,0 +1,28 @@
+on:
+    workflow_dispatch:  
+jobs:
+    envoi_mail:
+      permissions:
+        contents: write
+        pages: write
+      runs-on: ubuntu-latest
+
+      steps:
+
+        - name: Envoi de mail
+          uses: dawidd6/action-send-mail@v3
+          with:
+            server_address: smtp.gmail.com
+            server_port: 465
+            secure: true
+            username: ${{secrets.MAIL_USERNAME_GHA}}
+            password: ${{secrets.MAIL_PASSWORD_GHA}}
+            subject: Le Tableau recapitulatif du jour
+            to: kn.samati@gmail.com
+            from: Komlan Samati
+            body: Veuillez trouver ci-joint le tableau recapitulatif de la situation de la collecte de ce jour
+            cc: kn.samati@live.fr
+            ignore_cert: true
+            convert_markdown: true
+            attachments: mon_rapport.pdf
+            priority: low
