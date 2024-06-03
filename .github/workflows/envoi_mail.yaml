@@ -8,6 +8,13 @@ jobs:
       runs-on: ubuntu-latest
 
       steps:
+        - uses: actions/checkout@v4
+        
+        - name: Upload a Build Artifact
+          uses: actions/upload-artifact@v3.1.0
+          with:
+            name: mon_rapport.pdf
+            path: mon_rapport.pdf
 
         - name: Envoi de mail
           uses: dawidd6/action-send-mail@v3
