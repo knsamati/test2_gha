@@ -1,51 +1,57 @@
 ---
-title: "Rapport"
+title: "Etat Recaptulatif de la Collecte de ce jour: `r Sys.Date()`"
 author: "Komlan Samati"
 format:
   pdf:
     pdf-engine: lualatex
 ---
 
-## Quarto
+# I. Nombre de questionnaires remplis par enquêteur
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
-
-## Running Code
-
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
-
-You can add options to executable code like this 
+Le graphique ci-dessous retrace le nombre de questionnaires remplis par chaque enquêteurs.
 
 ```{r}
-#| echo: false
-2 * 2
-```
-
-The `echo: false` option disables the printing of code (only output is displayed).
-
-You can add options to executable code like this 
-
-```{r}
-#| label: tab
+#| label: graph
 #| warning: false
 #| message: false
 #| echo: false
-#| results: "asis"
+
 
 library(knitr)
 library(tidyverse)
+library(tibble)
 library(gt)
 readRDS('survey_data.rds') |>
-    select(3:6) -> df
+    select(3:7) -> df
 
-dim(df)
-df |>
-  summarise(nombre = n(),.by=enqu_teur) |>
-  kable()
+df %>% 
+  labelled::remove_val_labels() %>%
+  summarise(nombre = n(),.by=enqu_teur) %>%
+  ungroup %>%
+  add_row( enqu_teur = 'Moyenne', !!! colMeans(.[-1])) %>%
+  mutate(sup_moy = ifelse(enqu_teur == "Moyenne", TRUE, FALSE)) %>% 
+  mutate(enqu_teur = fct_reorder(enqu_teur, nombre)) %>% 
+  ggplot(aes(x=enqu_teur,y=nombre,fill=sup_moy)) +
+  geom_col(show.legend = FALSE) +
+  scale_fill_manual(name=NULL, values = c("#B0B0B0D0", "#00B0F0"))+
+  coord_flip() +
+  theme_minimal() +
+  theme(axis.title.x=element_blank(),
+        axis.title.y = element_blank(),
+        axis.text = element_text(size = 8.5),
+        panel.grid.minor.y = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.major.x = element_blank()
+       )
+
+ 
 ```
 
-The `echo: false` option disables the printing of code (only output is displayed).
 
+
+# II. Les questionnaires avec les valeures manquantes
+
+Le tableau ci-dessous donne les valeurs manquantes des questionnaires. Les enquêteurs sont invités à vérifier ces informations et à les complèter.
 
 ```{r}
 #| label: tab1
@@ -56,7 +62,25 @@ The `echo: false` option disables the printing of code (only output is displayed
 
 df |>
   labelled::remove_val_labels() |>
-  gt::gt()
+  filter(is.na(lieu_d_habitation) | is.na(entrer_votre_localisation)) |>
+  gt::gt() |>
+  tab_spanner(
+    label = md("**Les questionnaires à complèter**"),
+    columns = c(2:5)
+  ) %>%
+   fmt_number(
+    columns = 5,
+    decimals = 3
+  ) %>%
+  cols_label(
+    `enqu_teur` = "Nom enquêteur",
+    `sexe` = "Sexe",
+    `age` = "Age",
+    `lieu_d_habitation` = "Lieu de residence",
+    `entrer_votre_localisation` = "Geolocalisation"
+  ) %>%
+ cols_align(align = "center",
+             columns = 2:5)
 
 ```
 
