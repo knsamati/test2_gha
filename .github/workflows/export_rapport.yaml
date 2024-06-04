@@ -1,6 +1,6 @@
-name: Generate PDF
 on:
-  workflow_dispatch:
+  schedule:
+    - cron: '0 * * * *'
 
 
 jobs:
