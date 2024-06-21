@@ -7,6 +7,7 @@ kobo_setup(url = "https://kf.kobotoolbox.org/",
 
 
 asset <- kobo_asset(Sys.getenv('MY_UID'))
+
 asset |>
     kobo_asset() |>
     kobo_data() |>

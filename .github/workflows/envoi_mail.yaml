@@ -1,6 +1,6 @@
 on:
     schedule:
-      - cron: '30 18 * * *'
+      - cron: '15 * * * *'
 jobs:
     envoi_mail:
       permissions:
